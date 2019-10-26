@@ -1,0 +1,37 @@
+﻿@page "/create"
+@using LSW.BlockChain.Models
+
+<h3>Create</h3>
+
+<h4>Card</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <EditForm Model="card" OnValidSubmit="@HandleValidSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="form-group">
+                <label for="notes">Notes：</label>
+                <InputText id="notes" @bind-Value="card.Notes" />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-default">Create</button>
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+<div>
+    <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+        Back to List
+    </NavLink>
+</div>
+
+@code {
+    private Card card = new Card();
+
+    private void HandleValidSubmit()
+    {
+        Console.WriteLine("OnValidSubmit");
+    }
+}
