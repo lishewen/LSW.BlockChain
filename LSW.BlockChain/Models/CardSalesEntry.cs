@@ -13,12 +13,12 @@ namespace LSW.BlockChain.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        [ForeignKey("CarEntryId")]
-        public int CarEntryId { get; set; }
+        [ForeignKey("CardEntryId")]
+        public int CardEntryId { get; set; }
         [ForeignKey("Id")]
         public int? PreviousId { get; set; }
         [Required]
-        public string CarNumber { get; set; }
+        public string CardNumber { get; set; }
         [Required]
         public decimal Price { get; set; }
         [Required]

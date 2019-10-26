@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using LSW.BlockChain.Data;
 using LSW.BlockChain.Models;
 using Microsoft.EntityFrameworkCore;
+using LSW.BlockChain.Repos;
 
 namespace LSW.BlockChain
 {
@@ -28,6 +29,7 @@ namespace LSW.BlockChain
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContextPool<EFContext>(options => options.UseInMemoryDatabase("CardDB"));
+            services.AddScoped<ICardSalesRepository, CardSalesRepository>();
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
