@@ -1,5 +1,8 @@
 ﻿@page "/create"
 @using LSW.BlockChain.Models
+@using LSW.BlockChain.Data
+@inject CardService cardService
+@inject NavigationManager NavigationManager
 
 <h3>Create</h3>
 
@@ -30,8 +33,9 @@
 @code {
     private Card card = new Card();
 
-    private void HandleValidSubmit()
+    private async Task HandleValidSubmit()
     {
-        Console.WriteLine("OnValidSubmit");
+        await cardService.CreateCard(card);
+        NavigationManager.NavigateTo("/");
     }
 }
