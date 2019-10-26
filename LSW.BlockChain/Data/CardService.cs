@@ -16,5 +16,15 @@ namespace LSW.BlockChain.Data
         {
             await _repository.CreateCard(card);
         }
+
+        public async Task<Card> GetCardAsync(int cardId)
+        {
+            return await _repository.GetCard(cardId);
+        }
+
+        public async Task CreateCardSale(CardSalesEntry cardSalesEntry)
+        {
+            await _repository.CreateCardSale(cardSalesEntry);
+        }
     }
 }
