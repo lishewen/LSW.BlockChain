@@ -1,0 +1,66 @@
+﻿@page "/list"
+@using LSW.BlockChain.Models
+@using LSW.BlockChain.Data
+@inject CardService cardService
+
+<h3>List</h3>
+
+<p>
+    <NavLink class="nav-link" href="Create">
+        Create New
+    </NavLink>
+</p>
+
+@if (cards == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Notes
+                </th>
+                <th>
+                    CreateDate
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in cards)
+            {
+                <tr>
+                    <td>
+                        @item.Id
+                    </td>
+                    <td>
+                        @item.Notes
+                    </td>
+                    <td>
+                        @item.CreateDate.Date.ToShortDateString()
+                    </td>
+                    <td>
+                        <NavLink class="nav-link" href="@($"Details/{item.Id}")">
+                            Details
+                        </NavLink>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    IList<Card> cards;
+
+    protected override async Task OnInitializedAsync()
+    {
+        cards = await cardService.GetCards();
+    }
+}

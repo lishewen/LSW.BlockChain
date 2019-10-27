@@ -15,7 +15,7 @@ namespace LSW.BlockChain.BlockChain
             {
                 var previousBlock = cardSalesEntries.SingleOrDefault(c => c.Id == entry.PreviousId);
                 var blockText = BlockHelper.ConcatData(
-                    entry.CardEntryId,
+                    entry.CardId,
                     entry.CardNumber,
                     entry.Price,
                     entry.TransactionDate,

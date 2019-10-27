@@ -25,7 +25,7 @@ else
                 CreateDate
             </dt>
             <dd>
-                @card.CreateDate.Date.ToShortDateString();
+                @card.CreateDate.Date.ToShortDateString()
             </dd>
         </dl>
         <div>
@@ -63,7 +63,7 @@ else
                                 @item.Price
                             </td>
                             <td>
-                                @item.TransactionDate.Date.ToShortDateString();
+                                @item.TransactionDate.Date.ToShortDateString()
                             </td>
                             <td>
                                 @item.IsValid
@@ -73,7 +73,7 @@ else
                 </tbody>
             </table>
             <p>
-                <NavLink class="nav-link" href="CreateCarSalesEntry/@card.Id">
+                <NavLink class="nav-link" href="@($"CreateCarSalesEntry/{card.Id}")">
                     Create New Card Sales Entry
                 </NavLink>
             </p>
@@ -82,7 +82,7 @@ else
 }
 
 <div>
-    <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+    <NavLink class="nav-link" href="list">
         Back to List
     </NavLink>
 </div>

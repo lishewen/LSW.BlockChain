@@ -29,7 +29,7 @@ namespace LSW.BlockChain.Repos
             if (cardSalesEntry == null)
                 throw new ArgumentNullException(nameof(cardSalesEntry));
 
-            var cardSalesEntries = await _context.CardSalesEntries.Where(c => c.CardEntryId == cardSalesEntry.CardEntryId).ToListAsync();
+            var cardSalesEntries = await _context.CardSalesEntries.Where(c => c.CardId == cardSalesEntry.CardId).ToListAsync();
 
             BlockChainHelper.VerifyBlockChain(cardSalesEntries);
             if (cardSalesEntries.Any(c => !c.IsValid))
@@ -45,7 +45,7 @@ namespace LSW.BlockChain.Repos
                 previousBlockHash = previousCarSalesEntry.Hash;
             }
 
-            var blockText = BlockHelper.ConcatData(cardSalesEntry.CardEntryId, cardSalesEntry.CardNumber,
+            var blockText = BlockHelper.ConcatData(cardSalesEntry.CardId, cardSalesEntry.CardNumber,
                 cardSalesEntry.Price, cardSalesEntry.TransactionDate, previousBlockHash);
             cardSalesEntry.Hash = HashHelper.Hash(blockText);
 

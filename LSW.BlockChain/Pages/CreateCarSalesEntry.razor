@@ -12,7 +12,7 @@
 }
 else
 {
-    <h4>CardSalesEntry for @card?.Notes</h4>
+    <h4>CardSalesEntry for @card.Notes</h4>
     <hr />
     <div class="row">
         <div class="col-md-4">
@@ -32,7 +32,7 @@ else
                     <InputDate id="transactionDate" @bind-Value="cardSalesEntry.TransactionDate" />
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-default" />
+                    <input type="submit" value="Create" class="btn btn-primary" />
                 </div>
             </EditForm>
         </div>
@@ -40,7 +40,7 @@ else
 }
 
 <div>
-    <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+    <NavLink class="nav-link" href="list">
         Back to List
     </NavLink>
 </div>
@@ -59,7 +59,7 @@ else
 
     private async Task HandleValidSubmit()
     {
-        cardSalesEntry.CardEntryId = card.Id;
+        cardSalesEntry.CardId = card.Id;
         await cardService.CreateCardSale(cardSalesEntry);
         NavigationManager.NavigateTo("/Details/" + card.Id);
     }

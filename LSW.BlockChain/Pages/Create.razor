@@ -18,7 +18,7 @@
                 <InputText id="notes" @bind-Value="card.Notes" />
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </EditForm>
     </div>
@@ -36,6 +36,6 @@
     private async Task HandleValidSubmit()
     {
         await cardService.CreateCard(card);
-        NavigationManager.NavigateTo("/");
+        NavigationManager.NavigateTo("list");
     }
 }
