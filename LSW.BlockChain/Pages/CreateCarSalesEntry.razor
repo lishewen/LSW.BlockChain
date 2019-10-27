@@ -6,31 +6,38 @@
 
 <h3>CreateCarSalesEntry</h3>
 
-<h4>CarSalesEntry for @card?.Notes</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <EditForm Model="cardSalesEntry" OnValidSubmit="@HandleValidSubmit">
-            <DataAnnotationsValidator />
-            <ValidationSummary />
-            <div class="form-group">
-                <label for="cardNumber">CardNumber：</label>
-                <InputText id="cardNumber" @bind-Value="cardSalesEntry.CardNumber" />
-            </div>
-            <div class="form-group">
-                <label for="price">Price：</label>
-                <InputNumber id="price" @bind-Value="cardSalesEntry.Price" />
-            </div>
-            <div class="form-group">
-                <label for="transactionDate">TransactionDate：</label>
-                <InputDate id="transactionDate" @bind-Value="cardSalesEntry.TransactionDate" />
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </EditForm>
+@if (card == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <h4>CardSalesEntry for @card?.Notes</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <EditForm Model="cardSalesEntry" OnValidSubmit="@HandleValidSubmit">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+                <div class="form-group">
+                    <label for="cardNumber">CardNumber：</label>
+                    <InputText id="cardNumber" @bind-Value="cardSalesEntry.CardNumber" />
+                </div>
+                <div class="form-group">
+                    <label for="price">Price：</label>
+                    <InputNumber id="price" @bind-Value="cardSalesEntry.Price" />
+                </div>
+                <div class="form-group">
+                    <label for="transactionDate">TransactionDate：</label>
+                    <InputDate id="transactionDate" @bind-Value="cardSalesEntry.TransactionDate" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </EditForm>
+        </div>
     </div>
-</div>
+}
 
 <div>
     <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
@@ -48,14 +55,12 @@
     protected override async Task OnInitializedAsync()
     {
         card = await cardService.GetCardAsync(Id);
-        if (card == null)
-            NavigationManager.NavigateTo("error");
     }
 
     private async Task HandleValidSubmit()
     {
         cardSalesEntry.CardEntryId = card.Id;
         await cardService.CreateCardSale(cardSalesEntry);
-        NavigationManager.NavigateTo("/");
+        NavigationManager.NavigateTo("/Details/" + card.Id);
     }
 }

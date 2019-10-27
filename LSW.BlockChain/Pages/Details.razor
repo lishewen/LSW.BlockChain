@@ -1,0 +1,100 @@
+﻿@page "/Details/{Id:int}"
+@using LSW.BlockChain.Models
+@using LSW.BlockChain.Data
+@inject CardService cardService
+
+<h3>Details</h3>
+
+@if (card == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div>
+        <h4>Card</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Notes
+            </dt>
+            <dd>
+                @card.Notes
+            </dd>
+            <dt>
+                CreateDate
+            </dt>
+            <dd>
+                @card.CreateDate.Date.ToShortDateString();
+            </dd>
+        </dl>
+        <div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Id
+                        </th>
+                        <th>
+                            CardNumber
+                        </th>
+                        <th>
+                            Price
+                        </th>
+                        <th>
+                            TransactionDate
+                        </th>
+                        <th>
+                            IsValid
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in card.CardSalesEntries)
+                    {
+                        <tr>
+                            <td>
+                                @item.Id
+                            </td>
+                            <td>
+                                @item.CardNumber
+                            </td>
+                            <td>
+                                @item.Price
+                            </td>
+                            <td>
+                                @item.TransactionDate.Date.ToShortDateString();
+                            </td>
+                            <td>
+                                @item.IsValid
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <p>
+                <NavLink class="nav-link" href="CreateCarSalesEntry/@card.Id">
+                    Create New Card Sales Entry
+                </NavLink>
+            </p>
+        </div>
+    </div>
+}
+
+<div>
+    <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+        Back to List
+    </NavLink>
+</div>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private Card card;
+
+    protected override async Task OnInitializedAsync()
+    {
+        card = await cardService.GetCardAsync(Id);
+    }
+}
