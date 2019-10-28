@@ -9,28 +9,31 @@ namespace LSW.BlockChain.Models
     {
         public static void EnsureDbInitialized(this EFContext context)
         {
-            context.Database.EnsureDeleted();
-            context.Database.EnsureCreated();
+            if (!context.CardEntries.Any())
+            {
+                context.Database.EnsureDeleted();
+                context.Database.EnsureCreated();
 
-            context.CardEntries.AddRange(
-                new Card
-                {
-                    Notes = "Sales 123",
-                    CreateDate = DateTimeOffset.UtcNow
-                },
-                new Card
-                {
-                    Notes = "Sales 456",
-                    CreateDate = DateTimeOffset.UtcNow
-                },
-                new Card
-                {
-                    Notes = "Sales 109",
-                    CreateDate = DateTimeOffset.UtcNow
-                }
-            );
+                context.CardEntries.AddRange(
+                    new Card
+                    {
+                        Notes = "Sales 123",
+                        CreateDate = DateTimeOffset.UtcNow
+                    },
+                    new Card
+                    {
+                        Notes = "Sales 456",
+                        CreateDate = DateTimeOffset.UtcNow
+                    },
+                    new Card
+                    {
+                        Notes = "Sales 109",
+                        CreateDate = DateTimeOffset.UtcNow
+                    }
+                );
 
-            context.SaveChanges();
+                context.SaveChanges();
+            }
         }
     }
 }
