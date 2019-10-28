@@ -4,3 +4,29 @@
 <hr />
 <p>ASP.Net Core 3.0+Blazor ServerSide+SignalR区块链项目演示</p>
 <p>同时亦作为Blazor CRUD的参考</p>
+<h1>How To</h1>
+<hr />
+<p>若想体验区块链校验的效果，可以这样做</p>
+<ol>
+    <li>克隆代码</li>
+</ol>
+<div class="highlight highlight-source-shell"><pre>git clone https://github.com/lishewen/LSW.BlockChain.git </pre></div>
+<ol start="2">
+    <li>修改数据库连接，使用非InMemoryDatabase，如使用SQL Server</li>
+</ol>
+<div class="highlight highlight-source-cs"><pre><span class="pl-smi">services</span>.<span class="pl-en">AddDbContextPool</span>&lt;<span class="pl-en">EFContext</span>&gt;(<span class="pl-smi">options</span> <span class="pl-k">=&gt;</span> <span class="pl-smi">options</span>.<span class="pl-en">UseSqlServer</span>(<span class="pl-smi">Configuration</span>.<span class="pl-en">GetConnectionString</span>(<span class="pl-s"><span class="pl-pds">"</span>DefaultConnection<span class="pl-pds">"</span></span>)));</pre></div>
+<ol start="3">
+    <li>下载<code>dotnet ef</code>工具，并执行数据迁移生成数据库</li>
+</ol>
+<div class="highlight highlight-source-shell">
+    <pre>dotnet tool install --global dotnet-ef
+dotnet ef migrations add MyFirstMigration
+dotnet ef database update</pre>
+</div>
+<ol start="4">
+    <li>运行网站并到Card List的Details处，随意添加几条销售记录，此时可以看到销售记录的<code>IsValid</code>为<code>True</code></li>
+    <li>直接到数据库中修(篡)改<code>CardSalesEntries</code>表中某条销售记录的金额<code>Price</code></li>
+    <li>回到网站上刷新查看销售记录，发现被修改的销售记录及其后面的记录<code>IsValid</code>为<code>False</code>，即数据被篡改，区块链的校验失败，后面的链条断掉了</li>
+</ol>
+<p>以上即区块链校验的简单演示，只是给入门者了解其大概工作原理，当然不能直接用于生产</p>
+<p>Enjoy!:)</p>
