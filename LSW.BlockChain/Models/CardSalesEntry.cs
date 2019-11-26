@@ -19,7 +19,7 @@ namespace LSW.BlockChain.Models
         public decimal Price { get; set; }
         [Required]
         [DataType(DataType.Date)]
-        public DateTimeOffset TransactionDate { get; set; }
+        public DateTimeOffset TransactionDate { get; set; } = DateTimeOffset.Now;
         public string Hash { get; set; }
         [NotMapped]
         public bool IsValid { get; set; }
