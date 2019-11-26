@@ -21,15 +21,15 @@ else
                 <ValidationSummary />
                 <div class="form-group">
                     <label for="cardNumber">CardNumber：</label>
-                    <InputText id="cardNumber" @bind-Value="cardSalesEntry.CardNumber" />
+                    <InputText class="form-control" id="cardNumber" @bind-Value="cardSalesEntry.CardNumber" />
                 </div>
                 <div class="form-group">
                     <label for="price">Price：</label>
-                    <InputNumber id="price" @bind-Value="cardSalesEntry.Price" />
+                    <InputNumber class="form-control" id="price" @bind-Value="cardSalesEntry.Price" />
                 </div>
                 <div class="form-group">
                     <label for="transactionDate">TransactionDate：</label>
-                    <InputDate id="transactionDate" @bind-Value="cardSalesEntry.TransactionDate" />
+                    <InputDate class="form-control" id="transactionDate" @bind-Value="cardSalesEntry.TransactionDate" />
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Create" class="btn btn-primary" />
